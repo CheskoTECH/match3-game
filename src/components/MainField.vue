@@ -66,98 +66,99 @@ export default {
   name: "MainField",
   data() {
     return {
-      bricksArray: [
-        {
-          color: "red",
-          top: 12,
-          left: 12,
-        },
-        {
-          color: "blue",
-          top: 62,
-          left: 62,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 62,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 112,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 162,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 212,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 262,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 312,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 362,
-        },
-        {
-          color: "green",
-          top: 12,
-          left: 412,
-        },
-        {
-          color: "blue",
-          top: 112,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 162,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 212,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 262,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 312,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 362,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 412,
-          left: 62,
-        },
-        {
-          color: "blue",
-          top: 462,
-          left: 62,
-        },
-      ],
+      bricksArray: [],
+      // bricksArray: [
+      //   {
+      //     color: "red",
+      //     top: 12,
+      //     left: 12,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 62,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 112,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 162,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 212,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 262,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 312,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 362,
+      //   },
+      //   {
+      //     color: "green",
+      //     top: 12,
+      //     left: 412,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 112,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 162,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 212,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 262,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 312,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 362,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 412,
+      //     left: 62,
+      //   },
+      //   {
+      //     color: "blue",
+      //     top: 462,
+      //     left: 62,
+      //   },
+      // ],
     };
   },
   methods: {
@@ -167,8 +168,34 @@ export default {
     moveBrick(idx) {
       this.bricksArray[idx].top += 50;
     },
+    getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+    },
+    createNewBricks() {
+      let colorsArray = ["blue", "green", "purple", "red", "yellow"];
+
+      let topC = 12;
+      let leftC = 12;
+
+      for (let i = 0; i < 90; i++) {
+        this.bricksArray.push({
+          color: colorsArray[this.getRandomInt(0, 5)],
+          top: topC,
+          left: leftC,
+        });
+        leftC += 50;
+        if ((i + 1) % 9 === 0 && i !== 0) {
+          console.log("%%%9: ", i);
+          topC += 50;
+          leftC = 12;
+        }
+      }
+    },
   },
   created() {
+    this.createNewBricks();
     console.log(this.bricksArray);
   },
 };
