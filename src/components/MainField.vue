@@ -100,6 +100,8 @@ export default {
       return nList;
     },
     showAndDropClikedBricks() {
+      let colorsArray = ["blue", "green", "purple", "red", "yellow"];
+
       let indexes = [];
       this.bricksArray.forEach((brick, index) => {
         if (brick.show === false) {
@@ -107,7 +109,7 @@ export default {
         }
       });
 
-      console.log("indexes: ", indexes);
+      // console.log("indexes: ", indexes);
 
       indexes.forEach((idx) => {
         let topestPoint = 1000;
@@ -118,9 +120,10 @@ export default {
             }
           }
         });
-        console.log("topest: ", topestPoint);
+        // console.log("topest: ", topestPoint);
         this.bricksArray[idx].top = topestPoint;
         this.bricksArray[idx].show = true;
+        this.bricksArray[idx].color = colorsArray[this.getRandomInt(0, 5)];
       });
     },
     dropLeftBricksDown() {
@@ -137,7 +140,7 @@ export default {
                 iBrick.top + 50 === jBrick.top &&
                 iBrick.left === jBrick.left
               ) {
-                console.log(jBrick.top, " ", iBrick.top);
+                // console.log(jBrick.top, " ", iBrick.top);
                 move = false;
               }
             }
@@ -197,7 +200,7 @@ export default {
   },
   created() {
     this.createNewBricks();
-    console.log(this.bricksArray);
+    // console.log(this.bricksArray);
   },
 };
 </script>
