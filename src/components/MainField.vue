@@ -66,7 +66,6 @@ export default {
     },
     neighboursList(idx) {
       let nList = [];
-      // console.log("base: ", idx);
       let topOfClickedBrick = this.bricksArray[idx].top;
       let leftOfClickedBrick = this.bricksArray[idx].left;
       let clickedBrickColor = this.bricksArray[idx].color;
@@ -85,7 +84,6 @@ export default {
         ) {
           let isExists = false;
           this.checkNList.forEach((nIndex) => {
-            // console.log("Nindex: ", nIndex);
             if (nIndex === index) {
               isExists = true;
             }
@@ -94,13 +92,11 @@ export default {
           if (!isExists) {
             nList.push(index);
             this.checkNList.push(index);
-            // console.log("recursive: ", index);
             nList.push(...this.neighboursList(index));
           }
           isExists = false;
         }
       });
-      // this.checkNList = [];
       return nList;
     },
     showAndDropClikedBricks() {
@@ -109,27 +105,9 @@ export default {
         if (brick.show === false) {
           indexes.push(index);
         }
-        // brick.show = true
       });
-      // this.dropLeftBricksDown();
 
       console.log("indexes: ", indexes);
-
-      let once = false;
-
-      // indexes.forEach((idx) => {
-      //   this.bricksArray.forEach((brick) => {
-      //     if (this.bricksArray[idx].left === brick.left) {
-      //       if (!once) {
-      //         console.log("brtop: ", brick.top, idx);
-      //         this.bricksArray[idx].top = brick.top - 50;
-      //         this.bricksArray[idx].show = true;
-      //         once = true;
-      //       }
-      //     }
-      //   });
-      //   // once = false;
-      // });
 
       indexes.forEach((idx) => {
         let topestPoint = 1000;
@@ -138,40 +116,21 @@ export default {
             if (brick.top - 50 < topestPoint) {
               topestPoint = brick.top - 50;
             }
-            if (!once) {
-              // console.log("brtop: ", brick.top, idx);
-              // console.log("-50: ", brick.top - 50);
-              // this.bricksArray[idx].top = brick.top - 50;
-              // this.bricksArray[idx].show = true;
-              once = true;
-            }
           }
         });
         console.log("topest: ", topestPoint);
         this.bricksArray[idx].top = topestPoint;
         this.bricksArray[idx].show = true;
-
-        // once = false;
       });
-
-      // if (once) {
-      //   setTimeout(() => {
-      //     this.showAndDropClikedBricks();
-      //   }, 800);
-      // }
     },
     dropLeftBricksDown() {
-      // let indexes = [];
-      // console.log("CALL");
       let isMoved = false;
 
-      for (let i = 0; i < this.bricksArray.length; i++) {
+      for (let i = this.bricksArray.length - 1; i >= 0; i--) {
         let move = true;
         let iBrick = this.bricksArray[i];
         if (iBrick.show) {
-          // console.log("test: ", iBrick);
-
-          for (let j = i + 1; j < this.bricksArray.length; j++) {
+          for (let j = this.bricksArray.length - 1; j >= 0; j--) {
             let jBrick = this.bricksArray[j];
             if (jBrick.show) {
               if (
@@ -179,76 +138,33 @@ export default {
                 iBrick.left === jBrick.left
               ) {
                 console.log(jBrick.top, " ", iBrick.top);
-                // indexes.push(index);
                 move = false;
               }
             }
           }
         }
         if (move === true && iBrick.top !== 462 && iBrick.show === true) {
-          // console.log("2:", this.bricksArray[i].top, "MOVE: ", move);
-
-          // let block = false;
-          // this.bricksArray.forEach((brick) => {
-          //   if (
-          //     this.bricksArray[i].top + 50 === brick.top &&
-          //     brick.left === brick.left
-          //   ) {
-          //     block = true;
-          //   }
-          // });
-
-          // if (!block) {
-          //   }
-
           this.bricksArray[i].top += 50;
-          // console.log(
-          //   "22:",
-          //   this.bricksArray[i].top,
-          //   " ",
-          //   this.bricksArray[i].color
-          // );
           isMoved = true;
         }
       }
 
       if (isMoved) {
         this.dropLeftBricksDown();
-
-        setTimeout(() => {
-          this.showAndDropClikedBricks();
-        }, 900);
-        // setTimeout(() => {
-        //   this.bricksArray.forEach((brick) => {
-        //     if (brick.show === false) {
-        //       console.log("TOP1: ", brick.top);
-        //       // brick.top += 50;
-        //       // brick.top = 12;
-        //       brick.show = true;
-        //       console.log("TOP2: ", brick.top);
-        //     }
-        //   });
-        //   this.dropLeftBricksDown();
-        //   // this.dropLeftBricksDown();
-        // }, 1000);
       }
 
-      // console.log(indexes);
+      setTimeout(() => {
+        this.showAndDropClikedBricks();
+      }, 300); // 900
     },
     clickBrick(idx) {
-      // this.bricksArray[idx].top += 50;
       let neighboursList = this.neighboursList(idx);
       this.checkNList = [];
-      // neighboursList.push(idx);
-      // this.checkNList.push(idx);
-      // console.log("neighboursList: ", neighboursList);
       neighboursList.forEach((findedIndex) => {
         this.bricksArray[findedIndex].show = false;
         setTimeout(() => {
-          // this.bricksArray.splice(findedIndex, 1);
           this.bricksArray[findedIndex].top -= 500;
           this.dropLeftBricksDown();
-          // this.bricksArray[findedIndex].show = true;
         }, 700);
       });
     },
