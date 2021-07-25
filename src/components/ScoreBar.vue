@@ -11,8 +11,8 @@
       alt="score-bar"
       class="score-bg"
     />
-    <p class="time-left">{{ timeNumber }}</p>
-
+    <p class="time-left" v-if="!isTimeStopped">{{ timeNumber }}</p>
+    <p class="time-left" v-if="isTimeStopped">{{ timeFreezed }}</p>
     <img
       src="../assets/scoreBar/time-circle.png"
       alt="score-bar"
@@ -29,6 +29,19 @@ export default {
     scoreNumber: Number,
     timeNumber: Number,
     stepsLeft: Number,
+    isTimeStopped: Boolean,
+  },
+  data() {
+    return {
+      timeFreezed: 0,
+    };
+  },
+  watch: {
+    isTimeStopped: function (value) {
+      if (value === true) {
+        this.timeFreezed = this.timeNumber;
+      }
+    },
   },
 };
 </script>

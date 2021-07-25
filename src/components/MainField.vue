@@ -6,11 +6,15 @@
       :money="money"
     />
     <div class="field">
+      <div class="end-of-game" v-if="gameEnded">
+        <p class="final-text">{{ finalText }}</p>
+      </div>
       <score-bar
         class="score-bar"
         :scoreNumber="scoreNumber"
         :timeNumber="timeNumber"
         :stepsLeft="stepsLeft"
+        :isTimeStopped="gameEnded"
       ></score-bar>
       <div class="bonus-block" @click="mixBonus">
         <img src="../assets/bonuses/bonus.png" alt="bonus" class="bonus1" />
@@ -84,8 +88,10 @@ export default {
       scoreNumber: 0,
       maxScore: 1000,
       timeNumber: 90,
-      stepsLeft: 30,
-      money: 50,
+      stepsLeft: 42,
+      money: 125,
+      finalText: "You win!",
+      gameEnded: false,
     };
   },
   methods: {
@@ -193,12 +199,26 @@ export default {
       });
 
       this.addScore(neighboursList.length);
-      if (this.stepsLeft > 0) {
+      if (this.stepsLeft > 1) {
         this.stepsLeft -= 1;
+
+        if (this.scoreNumber === 1000) {
+          this.gameEnded = true;
+          this.finalText = "You win!";
+        }
+      } else {
+        this.stepsLeft -= 1;
+        if (this.scoreNumber === 1000) {
+          this.gameEnded = true;
+          this.finalText = "You win!";
+        } else {
+          this.gameEnded = true;
+          this.finalText = "You lose :(";
+        }
       }
     },
     mixBonus() {
-      if (this.money >= 25) {
+      if (this.money >= 25 && !this.gameEnded) {
         let colorsArray = ["blue", "green", "purple", "red", "yellow"];
 
         this.bricksArray.forEach((brick) => {
@@ -212,7 +232,7 @@ export default {
       }
     },
     addScore(amountOfClickedBricks) {
-      let newScore = amountOfClickedBricks * this.getRandomInt(1, 10);
+      let newScore = amountOfClickedBricks * this.getRandomInt(4, 12);
 
       if (this.scoreNumber + newScore < this.maxScore) {
         this.scoreNumber += newScore;
@@ -251,6 +271,12 @@ export default {
       }, 1000);
       setTimeout(() => {
         clearInterval(timer);
+        this.gameEnded = true;
+        if (this.scoreNumber === 1000) {
+          this.finalText = "You win!";
+        } else {
+          this.finalText = "You lose :(";
+        }
       }, this.timeNumber * 1000);
     },
   },
@@ -359,5 +385,26 @@ export default {
 
 .bonus-block:hover {
   transform: translateY(-8px);
+}
+
+.end-of-game {
+  height: 525px;
+  /* border: 1px solid red; */
+  width: 475px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #001e3bc7;
+  z-index: 10;
+}
+
+.final-text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%);
+  font-family: "Rammetto One", cursive;
+  color: #fff;
+  font-size: 32px;
 }
 </style>
