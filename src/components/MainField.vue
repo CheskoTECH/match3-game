@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <ProgressBar class="progress-bar" />
+    <ProgressBar class="progress-bar" :progressNumber="progressOfGame" />
     <div class="field">
       <div
         v-for="(brick, index) in bricksArray"
@@ -64,6 +64,7 @@ export default {
     return {
       bricksArray: [],
       checkNList: [],
+      progressOfGame: 205,
     };
   },
   methods: {

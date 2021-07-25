@@ -22,12 +22,19 @@
       src="../assets/progressBar/progressbar.png"
       alt="progress-bar"
       class="progress-bar"
+      :style="{
+        width: progressNumber + 'px',
+      }"
     />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    progressNumber: Number,
+  },
+};
 </script>
 
 <style scoped>
@@ -63,8 +70,9 @@ export default {};
 .progress-bar {
   position: absolute;
   top: 45px;
-  width: 230px;
+  /* width: 230px; */
   height: 30px;
+  border-radius: 40px;
   left: 19px;
 }
 </style>
