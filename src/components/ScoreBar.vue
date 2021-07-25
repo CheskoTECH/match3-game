@@ -1,18 +1,25 @@
 <template>
   <div class="main">
-    <img
+    <!-- <img
       src="../assets/scoreBar/score-and-time-panel.png"
       alt="score-bar"
       class="score-bg"
+    /> -->
+
+    <img
+      src="../assets/scoreBar/score-panel.png"
+      alt="score-bar"
+      class="score-bg"
     />
+    <p class="time-left">{{ timeNumber }}</p>
 
     <img
       src="../assets/scoreBar/time-circle.png"
       alt="score-bar"
-      class="time-circle"
+      class="steps-circle"
     />
-    <p class="score">{{ scoreNumber }}/{{ stepsLeft }}</p>
-    <p class="time">{{ timeNumber }}</p>
+    <p class="score">{{ scoreNumber }}</p>
+    <p class="steps">{{ stepsLeft }}</p>
   </div>
 </template>
 
@@ -41,7 +48,16 @@ export default {
   height: 100%;
 }
 
-.time-circle {
+.time-left {
+  position: absolute;
+  font-size: 20px;
+  color: #fff;
+  font-family: "Rammetto One", cursive;
+  left: 200px;
+  top: 8px;
+}
+
+.steps-circle {
   position: absolute;
   top: 52px;
   width: 175px;
@@ -59,7 +75,7 @@ export default {
   color: #fff;
 }
 
-.time {
+.steps {
   font-family: "Rammetto One", cursive;
   position: absolute;
   top: 29%;
