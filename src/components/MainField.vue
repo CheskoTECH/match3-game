@@ -67,7 +67,6 @@
         </transition>
       </div>
     </div>
-    <!-- <img src="../assets/field.png" alt="field" class="field" /> -->
   </div>
 </template>
 
@@ -218,18 +217,20 @@ export default {
       }
     },
     mixBonus() {
-      if (this.money >= 25 && !this.gameEnded) {
-        let colorsArray = ["blue", "green", "purple", "red", "yellow"];
+      setTimeout(() => {
+        if (this.money >= 25 && !this.gameEnded) {
+          let colorsArray = ["blue", "green", "purple", "red", "yellow"];
 
-        this.bricksArray.forEach((brick) => {
-          brick.show = false;
-          brick.color = colorsArray[this.getRandomInt(0, 5)];
-          setTimeout(() => {
-            brick.show = true;
-          }, 1000);
-        });
-        this.money -= 25;
-      }
+          this.bricksArray.forEach((brick) => {
+            brick.show = false;
+            brick.color = colorsArray[this.getRandomInt(0, 5)];
+            setTimeout(() => {
+              brick.show = true;
+            }, 1000);
+          });
+          this.money -= 25;
+        }
+      }, 700);
     },
     addScore(amountOfClickedBricks) {
       let newScore = amountOfClickedBricks * this.getRandomInt(4, 12);
@@ -320,7 +321,6 @@ export default {
 
 .field {
   height: 525px;
-  /* border: 1px solid red; */
   width: 475px;
   background-image: url("../assets/field.png");
   background-size: cover;
@@ -389,7 +389,6 @@ export default {
 
 .end-of-game {
   height: 525px;
-  /* border: 1px solid red; */
   width: 475px;
   position: absolute;
   top: 0;
