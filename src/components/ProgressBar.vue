@@ -78,7 +78,6 @@ export default {
 .progress-bar {
   position: absolute;
   top: 45px;
-  /* width: 230px; */
   height: 30px;
   border-radius: 40px;
   left: 19px;

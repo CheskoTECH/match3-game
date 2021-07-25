@@ -1,11 +1,5 @@
 <template>
   <div class="main">
-    <!-- <img
-      src="../assets/scoreBar/score-and-time-panel.png"
-      alt="score-bar"
-      class="score-bg"
-    /> -->
-
     <img
       src="../assets/scoreBar/score-panel.png"
       alt="score-bar"
