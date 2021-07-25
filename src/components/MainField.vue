@@ -73,7 +73,7 @@ export default {
       checkNList: [],
       progressOfGame: 305,
       scoreNumber: 295,
-      timeNumber: 89,
+      timeNumber: 90,
     };
   },
   methods: {
@@ -204,16 +204,23 @@ export default {
         });
         leftC += 50;
         if ((i + 1) % 9 === 0 && i !== 0) {
-          // console.log("%%%9: ", i);
           topC += 50;
           leftC = 12;
         }
       }
     },
+    timeTracking() {
+      let timer = setInterval(() => {
+        this.timeNumber -= 1;
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(timer);
+      }, this.timeNumber * 1000);
+    },
   },
   created() {
     this.createNewBricks();
-    // console.log(this.bricksArray);
+    this.timeTracking();
   },
 };
 </script>
