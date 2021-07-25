@@ -10,7 +10,7 @@
           top: brick.top + 'px',
           left: brick.left + 'px',
         }"
-        @click="sayAlert(brick), clickBrick(index)"
+        @click="clickBrick(index)"
       >
         <transition name="bounce">
           <img
@@ -61,9 +61,6 @@ export default {
     };
   },
   methods: {
-    sayAlert(info) {
-      console.log(info);
-    },
     neighboursList(idx) {
       let nList = [];
       let topOfClickedBrick = this.bricksArray[idx].top;
@@ -236,7 +233,7 @@ export default {
 
 .field {
   height: 525px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 475px;
   background-image: url("../assets/field.png");
   background-size: cover;
