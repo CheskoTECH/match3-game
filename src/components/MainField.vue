@@ -2,6 +2,11 @@
   <div class="main">
     <ProgressBar class="progress-bar" :progressNumber="progressOfGame" />
     <div class="field">
+      <score-bar
+        class="score-bar"
+        :scoreNumber="295"
+        :timeNumber="88"
+      ></score-bar>
       <div
         v-for="(brick, index) in bricksArray"
         :key="index"
@@ -54,17 +59,19 @@
 
 <script>
 import ProgressBar from "./ProgressBar.vue";
+import ScoreBar from "./ScoreBar.vue";
 
 export default {
   name: "MainField",
   components: {
     ProgressBar,
+    ScoreBar,
   },
   data() {
     return {
       bricksArray: [],
       checkNList: [],
-      progressOfGame: 205,
+      progressOfGame: 305,
     };
   },
   methods: {
@@ -262,5 +269,13 @@ export default {
   transform: translateX(-50%);
   width: 475px;
   height: 100px;
+}
+
+.score-bar {
+  position: absolute;
+  top: 0;
+  left: 550px;
+  height: 360px;
+  width: 320px;
 }
 </style>
