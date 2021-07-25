@@ -11,7 +11,7 @@
       alt="score-bar"
       class="time-circle"
     />
-    <p class="score">{{ scoreNumber }}</p>
+    <p class="score">{{ scoreNumber }}/{{ stepsLeft }}</p>
     <p class="time">{{ timeNumber }}</p>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
   props: {
     scoreNumber: Number,
     timeNumber: Number,
+    stepsLeft: Number,
   },
 };
 </script>

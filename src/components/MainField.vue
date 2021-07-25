@@ -9,6 +9,7 @@
         class="score-bar"
         :scoreNumber="scoreNumber"
         :timeNumber="timeNumber"
+        :stepsLeft="stepsLeft"
       ></score-bar>
       <div
         v-for="(brick, index) in bricksArray"
@@ -77,6 +78,7 @@ export default {
       scoreNumber: 0,
       maxScore: 1000,
       timeNumber: 90,
+      stepsLeft: 30,
     };
   },
   methods: {
@@ -184,6 +186,9 @@ export default {
       });
 
       this.addScore(neighboursList.length);
+      if (this.stepsLeft > 0) {
+        this.stepsLeft -= 1;
+      }
     },
     addScore(amountOfClickedBricks) {
       let newScore = amountOfClickedBricks * this.getRandomInt(1, 10);
