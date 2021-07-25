@@ -34,8 +34,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
-
 .main {
   box-sizing: border-box;
   position: relative;

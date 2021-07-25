@@ -26,6 +26,13 @@
         width: progressNumber + 'px',
       }"
     />
+
+    <img
+      src="../assets/bonuses/money-field.png"
+      alt="money"
+      class="money-field"
+    />
+    <p class="money-text">{{ money }}</p>
   </div>
 </template>
 
@@ -33,6 +40,7 @@
 export default {
   props: {
     progressNumber: Number,
+    money: Number,
   },
 };
 </script>
@@ -75,5 +83,21 @@ export default {
   border-radius: 40px;
   left: 19px;
   transition: all 0.5s;
+}
+
+.money-field {
+  position: absolute;
+  top: 20px;
+  left: 110%;
+  height: 40px;
+}
+
+.money-text {
+  position: absolute;
+  top: 22px;
+  left: 120%;
+  font-size: 22px;
+  color: #fff;
+  font-family: "Rammetto One", cursive;
 }
 </style>

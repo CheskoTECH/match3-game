@@ -3,6 +3,7 @@
     <ProgressBar
       class="progress-bar"
       :progressNumber="(435 / maxScore) * scoreNumber"
+      :money="money"
     />
     <div class="field">
       <score-bar
@@ -11,6 +12,11 @@
         :timeNumber="timeNumber"
         :stepsLeft="stepsLeft"
       ></score-bar>
+      <div class="bonus-block" @click="mixBonus">
+        <img src="../assets/bonuses/bonus.png" alt="bonus" class="bonus1" />
+        <p class="bonus1-text">25</p>
+        <p class="bonus1-title">mix!</p>
+      </div>
       <div
         v-for="(brick, index) in bricksArray"
         :key="index"
@@ -79,6 +85,7 @@ export default {
       maxScore: 1000,
       timeNumber: 90,
       stepsLeft: 30,
+      money: 50,
     };
   },
   methods: {
@@ -190,6 +197,20 @@ export default {
         this.stepsLeft -= 1;
       }
     },
+    mixBonus() {
+      if (this.money >= 25) {
+        let colorsArray = ["blue", "green", "purple", "red", "yellow"];
+
+        this.bricksArray.forEach((brick) => {
+          brick.show = false;
+          brick.color = colorsArray[this.getRandomInt(0, 5)];
+          setTimeout(() => {
+            brick.show = true;
+          }, 1000);
+        });
+        this.money -= 25;
+      }
+    },
     addScore(amountOfClickedBricks) {
       let newScore = amountOfClickedBricks * this.getRandomInt(1, 10);
 
@@ -242,6 +263,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+
 .bounce-enter-active {
   animation: bounce-in 0.5s;
 }
@@ -301,5 +324,40 @@ export default {
   left: 550px;
   height: 360px;
   width: 320px;
+}
+
+.bonus1 {
+  position: absolute;
+  top: 400px;
+  left: 545px;
+  height: 140px;
+  /* width: 320px; */
+}
+
+.bonus1-text {
+  position: absolute;
+  top: 485px;
+  left: 585px;
+  font-size: 18px;
+  font-family: "Rammetto One", cursive;
+  color: #fff;
+}
+
+.bonus1-title {
+  position: absolute;
+  top: 428px;
+  left: 575px;
+  font-size: 28px;
+  font-family: "Rammetto One", cursive;
+  color: #fff;
+}
+
+.bonus-block {
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.bonus-block:hover {
+  transform: translateY(-8px);
 }
 </style>
