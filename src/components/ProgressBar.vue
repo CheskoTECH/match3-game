@@ -74,5 +74,6 @@ export default {
   height: 30px;
   border-radius: 40px;
   left: 19px;
+  transition: all 0.5s;
 }
 </style>
