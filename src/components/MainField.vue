@@ -1,6 +1,9 @@
 <template>
   <div class="main">
-    <ProgressBar class="progress-bar" :progressNumber="progressOfGame" />
+    <ProgressBar
+      class="progress-bar"
+      :progressNumber="(435 / maxScore) * scoreNumber"
+    />
     <div class="field">
       <score-bar
         class="score-bar"
@@ -71,8 +74,8 @@ export default {
     return {
       bricksArray: [],
       checkNList: [],
-      progressOfGame: 305,
-      scoreNumber: 295,
+      scoreNumber: 0,
+      maxScore: 1000,
       timeNumber: 90,
     };
   },
@@ -122,8 +125,6 @@ export default {
         }
       });
 
-      // console.log("indexes: ", indexes);
-
       indexes.forEach((idx) => {
         let topestPoint = 1000;
         this.bricksArray.forEach((brick) => {
@@ -133,7 +134,6 @@ export default {
             }
           }
         });
-        // console.log("topest: ", topestPoint);
         this.bricksArray[idx].top = topestPoint;
         this.bricksArray[idx].show = true;
         this.bricksArray[idx].color = colorsArray[this.getRandomInt(0, 5)];
@@ -153,7 +153,6 @@ export default {
                 iBrick.top + 50 === jBrick.top &&
                 iBrick.left === jBrick.left
               ) {
-                // console.log(jBrick.top, " ", iBrick.top);
                 move = false;
               }
             }
@@ -183,6 +182,17 @@ export default {
           this.dropLeftBricksDown();
         }, 700);
       });
+
+      this.addScore(neighboursList.length);
+    },
+    addScore(amountOfClickedBricks) {
+      let newScore = amountOfClickedBricks * this.getRandomInt(1, 10);
+
+      if (this.scoreNumber + newScore < this.maxScore) {
+        this.scoreNumber += newScore;
+      } else {
+        this.scoreNumber = 1000;
+      }
     },
     getRandomInt(min, max) {
       min = Math.ceil(min);
