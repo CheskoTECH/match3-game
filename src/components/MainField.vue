@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <ProgressBar class="progress-bar" />
     <div class="field">
       <div
         v-for="(brick, index) in bricksArray"
@@ -52,8 +53,13 @@
 </template>
 
 <script>
+import ProgressBar from "./ProgressBar.vue";
+
 export default {
   name: "MainField",
+  components: {
+    ProgressBar,
+  },
   data() {
     return {
       bricksArray: [],
@@ -246,5 +252,14 @@ export default {
   width: 50px;
   height: 50px;
   transition: all 0.4s;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 475px;
+  height: 100px;
 }
 </style>
