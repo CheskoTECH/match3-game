@@ -4,8 +4,8 @@
     <div class="field">
       <score-bar
         class="score-bar"
-        :scoreNumber="295"
-        :timeNumber="88"
+        :scoreNumber="scoreNumber"
+        :timeNumber="timeNumber"
       ></score-bar>
       <div
         v-for="(brick, index) in bricksArray"
@@ -72,6 +72,8 @@ export default {
       bricksArray: [],
       checkNList: [],
       progressOfGame: 305,
+      scoreNumber: 295,
+      timeNumber: 89,
     };
   },
   methods: {
